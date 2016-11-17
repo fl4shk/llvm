@@ -323,6 +323,7 @@ set(LLVM_ALL_TARGETS
   Sparc
   SystemZ
   X86
+  XArch
   XCore
   )
 
