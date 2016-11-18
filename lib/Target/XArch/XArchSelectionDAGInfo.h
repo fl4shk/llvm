@@ -1,4 +1,4 @@
-//===-- XArchSelectionDAGInfo.cpp - XArch SelectionDAG Info ---------------===//
+//===-- XArchSelectionDAGInfo.h - XArch SelectionDAG Info -------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
 //
@@ -7,11 +7,18 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This file implements the XArchSelectionDAGInfo class.
+// This file defines the XArch subclass for TargetSelectionDAGInfo.
 //
 //===----------------------------------------------------------------------===//
 
-#include "XArchSelectionDAGInfo.h"
-using namespace llvm;
+#pragma once
 
-XArchSelectionDAGInfo::~XArchSelectionDAGInfo() {}
+#include "llvm/CodeGen/SelectionDAGTargetInfo.h"
+
+namespace llvm {
+
+class XArchSelectionDAGInfo : public SelectionDAGTargetInfo {
+public:
+  ~XArchSelectionDAGInfo();
+};
+}

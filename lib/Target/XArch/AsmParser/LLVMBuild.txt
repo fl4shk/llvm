@@ -19,5 +19,5 @@
 type = Library
 name = XArchAsmParser
 parent = XArch
-; required_libraries = XArchDesc XArchInfo XArchUtils MC MCParser Support
+required_libraries = XArchDesc XArchInfo MC MCParser Support
 add_to_library_groups = XArch

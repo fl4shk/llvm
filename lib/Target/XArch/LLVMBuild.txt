@@ -22,14 +22,14 @@ subdirectories = AsmParser Disassembler InstPrinter MCTargetDesc TargetInfo Util
 type = TargetGroup
 name = XArch
 parent = Target
-has_asmparser = 0
-has_asmprinter = 0
-has_disassembler = 0
+has_asmparser = 1
+has_asmprinter = 1
+has_disassembler = 1
 has_jit = 0
 
 [component_1]
 type = Library
 name = XArchCodeGen
 parent = XArch
-; required_libraries = XArchAsmPrinter XArchDesc XArchInfo XArchUtils Analysis AsmPrinter CodeGen Core MC Scalar SelectionDAG Support Target GlobalISel
+required_libraries = XArchAsmPrinter XArchDesc XArchInfo Analysis AsmPrinter CodeGen Core MC Scalar SelectionDAG Support Target GlobalISel
 add_to_library_groups = XArch

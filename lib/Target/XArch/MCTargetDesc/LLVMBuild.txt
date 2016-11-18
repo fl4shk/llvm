@@ -19,5 +19,5 @@
 type = Library
 name = XArchDesc
 parent = XArch
-; required_libraries = XArchAsmPrinter XArchInfo MC Support
+required_libraries = XArchAsmPrinter XArchInfo MC Support
 add_to_library_groups = XArch

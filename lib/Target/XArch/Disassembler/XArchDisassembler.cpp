@@ -1,4 +1,4 @@
-//===-- XArchSelectionDAGInfo.cpp - XArch SelectionDAG Info ---------------===//
+//===- XArchDisassembler.cpp - Disassembler for XArch -------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
 //
@@ -7,11 +7,17 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This file implements the XArchSelectionDAGInfo class.
 //
 //===----------------------------------------------------------------------===//
 
-#include "XArchSelectionDAGInfo.h"
+#include "llvm/MC/MCFixedLenDisassembler.h"
+#include "llvm/MC/MCInst.h"
+#include "llvm/Support/Debug.h"
+#include "llvm/Support/ErrorHandling.h"
+#include "llvm/Support/TargetRegistry.h"
+
 using namespace llvm;
 
-XArchSelectionDAGInfo::~XArchSelectionDAGInfo() {}
+
+extern "C" void LLVMInitializeXArchDisassembler() {
+}
