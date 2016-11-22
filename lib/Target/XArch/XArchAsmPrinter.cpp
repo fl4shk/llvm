@@ -15,7 +15,10 @@
 #define DEBUG_TYPE "asm-printer"
 #include "XArch.h"
 #include "InstPrinter/XArchInstPrinter.h"
-#include "MCTargetDesc/XArchMCTargetDesc.h"
+#include "XArchInstrInfo.h"
+#include "XArchMCInstLower.h"
+#include "XArchSubtarget.h"
+#include "XArchTargetMachine.h"
 #include "llvm/ADT/SmallString.h"
 #include "llvm/ADT/StringExtras.h"
 #include "llvm/CodeGen/AsmPrinter.h"
@@ -45,11 +48,12 @@ using namespace llvm;
 
 namespace {
 class XArchAsmPrinter : public AsmPrinter {
+  XArchMCInstLower MCInstLowering;
 
 public:
   explicit XArchAsmPrinter(TargetMachine &TM,
                          std::unique_ptr<MCStreamer> Streamer)
-      : AsmPrinter(TM, std::move(Streamer)) {}
+      : AsmPrinter(TM, std::move(Streamer)), MCInstLowering(*this) {}
 
   virtual llvm::StringRef getPassName() const { return "XArch Assembly Printer"; }
 
@@ -68,6 +72,7 @@ void XArchAsmPrinter::EmitFunctionEntryLabel() {
 
 void XArchAsmPrinter::EmitInstruction(const MachineInstr *MI) {
   MCInst TmpInst;
+  MCInstLowering.Lower(MI, TmpInst);
 
   EmitToStreamer(*OutStreamer, TmpInst);
 }
