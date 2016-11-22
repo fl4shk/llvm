@@ -57,3 +57,12 @@ def ADJCALLSTACKUP   : XArchPseudoInst<(outs), (ins i32imm:$amt1, i32imm:$amt2),
                                     [(XArchcallseq_end timm:$amt1, timm:$amt2)]>;
 }
 
+//===----------------------------------------------------------------------===//
+// Return Instructions
+//===----------------------------------------------------------------------===//
+
+let isTerminator = 1, isReturn = 1, isBarrier = 1, Uses = [LR] in {
+  def RET : InstXArch<(outs), (ins variable_ops),
+                    "ret",  [(XArchRetFlag)]> {
+  }
+}
