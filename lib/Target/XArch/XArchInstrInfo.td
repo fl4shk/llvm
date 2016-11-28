@@ -36,13 +36,20 @@ multiclass BinOp<bits<4> opcode, string opstr, SDNode opnode> {
 
 defm ADD  : BinOp<0b0000, "add", add>;
 
-def XArchcallseq_start : SDNode<"ISD::CALLSEQ_START",
-                                SDCallSeqStart<[ SDTCisVT<0, i32> ]>,
-                                [SDNPHasChain, SDNPOutGlue]>;
-def XArchcallseq_end   : SDNode<"ISD::CALLSEQ_END",
-                                SDCallSeqEnd<[ SDTCisVT<0, i32>,
-                                               SDTCisVT<1, i32> ]>,
-                                [SDNPHasChain, SDNPOptInGlue, SDNPOutGlue]>;
+//===----------------------------------------------------------------------===//
+// Mov Instructions
+//===----------------------------------------------------------------------===//
+def MOVrr  : ALUInst<0b1101, (outs GRRegs:$dst), (ins GRRegs:$src),
+                     "mov $dst, $src",
+                     [/* No pattern */]> {
+  bits<4> dst;
+  bits<4> src;
+}
+
+def MOVi32 : InstXArch<(outs GRRegs:$dst), (ins i32imm:$src), "",
+                     [(set i32:$dst, (movei32 imm:$src))]> {
+  let isPseudo = 1;
+}
 
 //===----------------------------------------------------------------------===//
 // Pseudo Instructions

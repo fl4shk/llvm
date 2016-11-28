@@ -29,9 +29,7 @@ enum NodeType {
   // Start the numbering where the builtin ops and target ops leave off.
   FIRST_NUMBER = ISD::BUILTIN_OP_END,
   RET_FLAG,
-  // This loads the symbol (e.g. global address) into a register.
-  LOAD_SYM,
-  CALL
+  MOVEi32,
 };
 }
 

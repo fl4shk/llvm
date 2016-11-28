@@ -178,6 +178,7 @@ bool AsmPrinter::doInitialization(Module &M) {
   MMI = getAnalysisIfAvailable<MachineModuleInfo>();
 
   // Initialize TargetLoweringObjectFile.
+  assert(&getObjFileLowering() && "AsmPrinter doesn't have needed TargetLoweringObjectFile");
   const_cast<TargetLoweringObjectFile&>(getObjFileLowering())
     .Initialize(OutContext, TM);
 

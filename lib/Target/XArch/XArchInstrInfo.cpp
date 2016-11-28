@@ -71,6 +71,7 @@ bool XArchInstrInfo::analyzeBranch(MachineBasicBlock &MBB, MachineBasicBlock *&T
                    SmallVectorImpl<MachineOperand> &Cond,
                    bool AllowModify) const {
   // XXX:
+  //llvm_unreachable("Unimplemented operand");
   return false;
 }
 
@@ -80,6 +81,7 @@ bool XArchInstrInfo::analyzeBranch(MachineBasicBlock &MBB, MachineBasicBlock *&T
 unsigned XArchInstrInfo::removeBranch(MachineBasicBlock &MBB,
                       int *BytesRemoved) const {
   // XXX:
+  llvm_unreachable("Unimplemented operand");
   return 0;
 }
 
@@ -98,6 +100,7 @@ unsigned XArchInstrInfo::insertBranch(MachineBasicBlock &MBB, MachineBasicBlock 
                       const DebugLoc &DL,
                       int *BytesAdded) const {
   // XXX:
+  llvm_unreachable("Unimplemented operand");
   return 0;
 }
 
@@ -105,7 +108,8 @@ void XArchInstrInfo::copyPhysReg(MachineBasicBlock &MBB, MachineBasicBlock::iter
                  const DebugLoc &DL, unsigned DestReg, unsigned SrcReg,
                  bool KillSrc) const {
 
-  // XXX:
+  BuildMI(MBB, I, I->getDebugLoc(), get(XArch::MOVrr), DestReg)
+      .addReg(SrcReg, getKillRegState(KillSrc));
 }
 
 void XArchInstrInfo::storeRegToStackSlot(MachineBasicBlock &MBB,
@@ -116,6 +120,7 @@ void XArchInstrInfo::storeRegToStackSlot(MachineBasicBlock &MBB,
                                          const TargetRegisterInfo *TRI) const
 {
   // XXX:
+  llvm_unreachable("Unimplemented operand");
 }
 
 void XArchInstrInfo::loadRegFromStackSlot(MachineBasicBlock &MBB,
@@ -125,6 +130,7 @@ void XArchInstrInfo::loadRegFromStackSlot(MachineBasicBlock &MBB,
                                           const TargetRegisterInfo *TRI) const
 {
   // XXX:
+  llvm_unreachable("Unimplemented operand");
 }
 
 bool XArchInstrInfo::expandPostRAPseudo(MachineInstr &MI) const {

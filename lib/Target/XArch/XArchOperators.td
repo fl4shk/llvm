@@ -7,5 +7,20 @@
 //
 //===----------------------------------------------------------------------===//
 
+def MoveImm32Ty : SDTypeProfile<1, 1, [
+  SDTCisSameAs<0, 1>, SDTCisInt<0>
+]>;
+
+
+def XArchcallseq_start : SDNode<"ISD::CALLSEQ_START",
+                                SDCallSeqStart<[ SDTCisVT<0, i32> ]>,
+                                [SDNPHasChain, SDNPOutGlue]>;
+def XArchcallseq_end   : SDNode<"ISD::CALLSEQ_END",
+                                SDCallSeqEnd<[ SDTCisVT<0, i32>,
+                                               SDTCisVT<1, i32> ]>,
+                                [SDNPHasChain, SDNPOptInGlue, SDNPOutGlue]>;
+
 def XArchRetFlag    : SDNode<"XArchISD::RET_FLAG", SDTNone,
                            [SDNPHasChain, SDNPOptInGlue, SDNPVariadic]>;
+
+def movei32 : SDNode<"XArchISD::MOVEi32", MoveImm32Ty>;
