@@ -6,6 +6,7 @@ tablegen(LLVM XArchGenAsmWriter.inc -gen-asm-writer)
 tablegen(LLVM XArchGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM XArchGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM XArchGenSubtargetInfo.inc -gen-subtarget)
+tablegen(LLVM XArchGenDisassemblerTables.inc -gen-disassembler)
 tablegen(LLVM XArchGenMCCodeEmitter.inc -gen-emitter)
 
 add_public_tablegen_target(XArchCommonTableGen)

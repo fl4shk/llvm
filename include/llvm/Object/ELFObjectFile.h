@@ -897,6 +897,8 @@ StringRef ELFObjectFile<ELFT>::getFileFormatName() const {
   switch (EF.getHeader()->e_ident[ELF::EI_CLASS]) {
   case ELF::ELFCLASS32:
     switch (EF.getHeader()->e_machine) {
+    case ELF::EM_XARCH:
+      return "ELF32-XArch";
     case ELF::EM_386:
       return "ELF32-i386";
     case ELF::EM_IAMCU:
@@ -929,6 +931,8 @@ StringRef ELFObjectFile<ELFT>::getFileFormatName() const {
     }
   case ELF::ELFCLASS64:
     switch (EF.getHeader()->e_machine) {
+    case ELF::EM_XARCH:
+      return "ELF64-XArch";
     case ELF::EM_386:
       return "ELF64-i386";
     case ELF::EM_X86_64:
@@ -966,6 +970,8 @@ template <class ELFT>
 unsigned ELFObjectFile<ELFT>::getArch() const {
   bool IsLittleEndian = ELFT::TargetEndianness == support::little;
   switch (EF.getHeader()->e_machine) {
+  case ELF::EM_XARCH:
+    return Triple::xarch;
   case ELF::EM_386:
   case ELF::EM_IAMCU:
     return Triple::x86;
