@@ -134,7 +134,7 @@ void XArchMCCodeEmitter::encodeInstruction(const MCInst &MI, raw_ostream &OS,
                                          SmallVectorImpl<MCFixup> &Fixups,
                                          const MCSubtargetInfo &STI) const {
   const MCInstrDesc &Desc = MCII.get(MI.getOpcode());
-  if (Desc.getSize() != 4) {
+  if (Desc.getSize() != 16) {
     llvm_unreachable("Unexpected instruction size!");
   }
 
