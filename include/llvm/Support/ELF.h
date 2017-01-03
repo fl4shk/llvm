@@ -312,6 +312,7 @@ enum {
   EM_BPF = 247,           // Linux kernel bpf virtual machine
 
   EM_XARCH = 0x1000,
+  EM_SPCPU = 9000,
   // A request has been made to the maintainer of the official registry for
   // such numbers for an official value for WebAssembly. As soon as one is
   // allocated, this enum will be updated to use it.

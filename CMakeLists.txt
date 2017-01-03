@@ -324,6 +324,7 @@ set(LLVM_ALL_TARGETS
   SystemZ
   X86
   XArch
+  SPCPU
   XCore
   )
 

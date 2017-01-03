@@ -899,6 +899,8 @@ StringRef ELFObjectFile<ELFT>::getFileFormatName() const {
     switch (EF.getHeader()->e_machine) {
     case ELF::EM_XARCH:
       return "ELF32-XArch";
+    case ELF::EM_SPCPU:
+      return "ELF32-SPCPU";
     case ELF::EM_386:
       return "ELF32-i386";
     case ELF::EM_IAMCU:
@@ -933,6 +935,8 @@ StringRef ELFObjectFile<ELFT>::getFileFormatName() const {
     switch (EF.getHeader()->e_machine) {
     case ELF::EM_XARCH:
       return "ELF64-XArch";
+    case ELF::EM_SPCPU:
+      return "ELF64-SPCPU";
     case ELF::EM_386:
       return "ELF64-i386";
     case ELF::EM_X86_64:
@@ -972,6 +976,8 @@ unsigned ELFObjectFile<ELFT>::getArch() const {
   switch (EF.getHeader()->e_machine) {
   case ELF::EM_XARCH:
     return Triple::xarch;
+  case ELF::EM_SPCPU:
+    return Triple::spcpu;
   case ELF::EM_386:
   case ELF::EM_IAMCU:
     return Triple::x86;

@@ -1,0 +1,81 @@
+syn keyword CTagsMember ID Symbols
+syn keyword CTagsEnumeratorName State
+syn keyword CTagsEnumerationValue Used DefinedGlobal DefinedWeak Defined UndefinedWeak NeverSeen Global
+syn keyword CTagsFunction getStringTableData LLVMGetSectionName isForwarder EmitInstruction getFileFormatName getData
+syn keyword CTagsFunction segmentIndex getSymtabLoadCommand getSymbolValue base_relocs getChildOffset createELFObjectFile getDllName getObjectForArch getString checkSymbolTable getSubLibraryCommand getForwardTo getLinkeditDataLoadCommand LLVMGetRelocationSymbol child_end createBinary initDebugDirectoryPtr base_reloc_end getSubFrameworkCommand ObjectFile object_category ordinal getRelocatedSection getHeader64 isRelocationScattered getBytesInAddress name getSymbolAuxData getLinkOptHintsLoadCommand
+syn keyword CTagsFunction LLVMGetRelocationTypeName getSymbolByIndex export_directory_begin getSymbolAddress EmitLabel getSymbolSection getAnyRelocationSection addend getPE32PlusHeader moveSymbolNext IRObjectFile lookup_table_symbols getHeader createSymbolicFile export_directory_end getRelocationLength log getRelocation begin_dices getAnyRelocationPCRel SymbolicFile getCOFFSymbol getSymbolName getEncryptionInfoCommand64 EmitCommonSymbol createObjectFile getRelocationSection pushNode getSectionAddress
+syn keyword CTagsFunction getELFRelocationTypeName toSec NodeState getSegmentLoadCommand export_directories getEncryptionInfoCommand getPE32Header flags getAnyRelocationAddress COFFObjectFile base_reloc_begin isSectionData exports getDebugPDBInfo LLVMGetRelocationType getHintName hasSymbolTable moveToFirst import_directories LLVMGetSymbolSize guessLibraryShortName getRvaAndSizeAsBytes LLVMGetSymbolName LLVMDisposeSymbolIterator getScatteredRelocationValue initBaseRelocPtr getRelocations getExportRVA
+syn keyword CTagsFunction LLVMGetRelocationOffset getDyldInfoLoadCommand findSym getVersionMinLoadCommand LLVMIsSymbolIteratorAtEnd getDylinkerCommand getRelocationTypeName getSymbolValueImpl getRelocationRelocatedSection LLVMMoveToNextSection moveNext isSectionBitcode ExportEntry LLVMGetSymbolAddress end getDataDirectory LLVMMoveToNextRelocation message LLVMGetSectionSize initExportTablePtr getArch setFirstRegular lookup_table_end getDyldInfoRebaseOpcodes child_begin getSourceVersionCommand
+syn keyword CTagsFunction getDyldInfoBindOpcodes getImportTableEntry writeArchive getSectionContents isRelocatableObject segmentOffset getPlainRelocationExternal visitUsedSymbol MachOBindEntry delay_import_directory_begin isSectionCompressed getSize unwrap LLVMDisposeSectionIterator readSLEB128 LLVMGetSections moveToEnd getDataInCodeTableEntry create findBitcodeInMemBuffer getAsBinary imported_symbol_end isNotObjectErrorInvalidFileType MachORebaseEntry getSymbolSectionID isValidArch rebaseTable
+syn keyword CTagsFunction getScatteredRelocationType getModuleSummaryIndexForFile getAsArchive GenericBinaryError symbolName section_begin anchor LLVMGetRelocations getHostArch ReadULEB128s otherName getImageBase getRawName getSectionAlignment getNValue containsSymbol initSymbolTablePtr getSectionRawName getUuid getName isThinMember getDylibIDLoadCommand LLVMGetSectionContainsSymbol LLVMMoveToNextSymbol getUID nodeOffset MachOObjectFile lazyBindTable getArchTriple getDyldInfoLazyBindOpcodes markUsed
+syn keyword CTagsFunction compareAddress end_dices getSectionFinalSegmentName getRawSize getVaPtr getOrdinalBase getCOFFSection getIndirectSymbolTableEntry ELFObjectFileBase typeName Archive getImportLookupTableRVA other imported_symbol_begin getDelayImportTable initImportTablePtr EmitZerofill getFileName getRoutinesCommand64 ArchiveMemberHeader LLVMMoveToContainingSection getAsObjectFile getAccessMode getDataInCodeLoadCommand isSectionText getDyldInfoWeakBindOpcodes getNext moveRelocationNext
+syn keyword CTagsFunction LLVMCreateObjectFile LLVMGetRelocationValueString symbol_begin getSectionID getImportAddress ModuleSummaryIndexObjectFile LLVMGetSectionContents getAnyRelocationLength load_commands getCOFFRelocation getThreadCommand getPlainRelocationSymbolNum getSymbolAlignment getOrdinal getNumberOfSymbols getRelocationType getRpathCommand address lookup_table_begin imported_symbols EmitSymbolAttribute takeIndex readULEB128 getRvaPtr LLVMIsSectionIteratorAtEnd getSymbol64TableEntry
+syn keyword CTagsFunction findBitcodeInObject begin_load_commands getSection getSymbolTableEntry getDice getCommonSymbolSizeImpl getMember LLVMDisposeObjectFile Binary getGID MachOUniversalBinary getRelocationSymbol getSectionSize getAnyRelocationType LLVMDisposeRelocationIterator section_rel_begin toRel getSubClientCommand isEmpty computeSymbolSizes getFile getSectionRawFinalSegmentName delay_import_directory_end getFeatures CollectAsmUndefinedRefs EmitAssignment getHintNameRVA getBuffer
+syn keyword CTagsFunction getIndirectName getScatteredRelocationScattered initDelayImportTablePtr LLVMIsRelocationIteratorAtEnd begin getSection64 getType import_directory_begin getMemoryBufferRef getSymbolType markGlobal markDefined bindTable getLibraryShortNameByIndex getRVA isSectionBSS printSymbolName pushDownUntilBottom NewArchiveMember getOldMember end_load_commands weakBindTable getSymbolFlags getUuidCommand section_rel_end getRoutinesCommand getSegment64LoadCommand getSymbolGV isOrdinal
+syn keyword CTagsFunction isSectionVirtual import_directory_end delay_import_directories toSymb getLastModified getSymbolIndex getSubUmbrellaCommand Child ObjectForArch section_end createMachOObjectFile getFullName takeModule is64Bit getImportAddressTableRVA getRelocationOffset symbol_end createCOFFObjectFile getSectionType getDyldInfoExportsTrie getDysymtabLoadCommand moveSectionNext getSectionName wrap getTargetTriple LLVMGetSymbols getLinkerOptionLoadCommand getEntryPointCommand LLVMGetSectionAddress
+syn keyword CTagsType const_iterator
+syn keyword CTagsDefinedName LLVM_LIB_OBJECT_RECORDSTREAMER_H
+syn keyword CTagsClass RecordStreamer
+syn keyword CTagsNamespace llvm
+
+" Matches for file ELF.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "ELF.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsDefinedName ELF_RELOC
+	syn keyword CTagsNamespace object llvm
+	
+endif
+" Matches for file ArchiveWriter.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "ArchiveWriter.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsFunction printGNUSmallMemberHeader printBSDMemberHeader printRestOfMemberHeader writeSymbolTable now printWithSpacePadding useStringTable print32 writeStringTable printMemberHeader computeRelativePath
+	
+endif
+" Matches for file IRObjectFile.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "IRObjectFile.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsFunction __anon9ba83e080102
+	
+endif
+" Matches for file ELFObjectFile.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "ELFObjectFile.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsNamespace llvm
+	
+endif
+" Matches for file MachOObjectFile.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "MachOObjectFile.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsStructure section_base MachOElement
+	syn keyword CTagsMember Offset segname sectname Size Name
+	syn keyword CTagsFunction checkVersCommand getScatteredRelocationLength getPlainRelocationType checkLinkerOptCommand checkDyldCommand checkDyldInfoCommand checkDysymtabCommand checkTwoLevelHintsCommand getFirstLoadCommandInfo getNextLoadCommandInfo checkDylibCommand parseSegmentOrSectionName checkSymtabCommand
+	syn keyword CTagsFunction checkRpathCommand getPlainRelocationLength getLoadCommandInfo parseSegmentLoadCommand checkDylibIdCommand checkSubCommand checkThreadCommand getPlainRelocationAddress getStructOrErr getCPUType getPtr isLoadCommandObsolete malformedError getSectionPtr getScatteredRelocationAddress checkLinkeditDataCommand getPlainRelocationPCRel getScatteredRelocationPCRel getSectionFlags parseHeader advance getSymbolTableEntryBase getStruct checkEncryptCommand checkOverlappingElement
+	syn keyword CTagsNamespace __anond45dff550110
+	
+endif
+" Matches for file Error.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "Error.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsGlobalVariable error_category
+	syn keyword CTagsFunction message __anondf7d4ec00202 name
+	syn keyword CTagsClass _object_error_category
+	syn keyword CTagsNamespace __anondf7d4ec00110
+	
+endif
+" Matches for file COFFObjectFile.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "COFFObjectFile.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsFunction checkOffset getObject importedSymbolEnd makeImportedSymbolIterator decodeBase64StringEntry checkSize importedSymbolBegin getFirstReloc getNumberOfRelocations
+	syn keyword CTagsDefinedName LLVM_COFF_SWITCH_RELOC_TYPE_NAME
+	
+endif
+" Matches for file MachOUniversal.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "MachOUniversal.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsFunction getUniversalBinaryStruct malformedError
+	syn keyword CTagsDefinedName MAXSECTALIGN
+	
+endif
+" Matches for file SymbolSize.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "SymbolSize.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsFunction getSymbolSectionID getSectionID
+	
+endif
+" Matches for file Archive.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "Archive.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsConstant Magic ThinMagic
+	syn keyword CTagsFunction malformedError __anon48a8da980102
+	
+endif

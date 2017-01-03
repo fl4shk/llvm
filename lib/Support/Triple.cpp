@@ -52,6 +52,7 @@ StringRef Triple::getArchTypeName(ArchType Kind) {
   case x86:            return "i386";
   case x86_64:         return "x86_64";
   case xarch:          return "xarch";
+  case spcpu:          return "spcpu";
   case xcore:          return "xcore";
   case nvptx:          return "nvptx";
   case nvptx64:        return "nvptx64";
@@ -117,6 +118,7 @@ StringRef Triple::getArchTypePrefix(ArchType Kind) {
   case x86_64:      return "x86";
 
   case xarch:       return "xarch";
+  case spcpu:       return "spcpu";
 
   case xcore:       return "xcore";
 
@@ -643,6 +645,7 @@ static Triple::ObjectFormatType getDefaultFormat(const Triple &T) {
   case Triple::wasm32:
   case Triple::wasm64:
   case Triple::xarch:
+  case Triple::spcpu:
   case Triple::xcore:
     return Triple::ELF;
 
@@ -1194,6 +1197,7 @@ static unsigned getArchPointerBitWidth(llvm::Triple::ArchType Arch) {
   case llvm::Triple::systemz:
   case llvm::Triple::x86_64:
   case llvm::Triple::xarch:
+  case llvm::Triple::spcpu:
   case llvm::Triple::amdil64:
   case llvm::Triple::hsail64:
   case llvm::Triple::spir64:
@@ -1228,6 +1232,7 @@ Triple Triple::get32BitArchVariant() const {
   case Triple::systemz:
   case Triple::ppc64le:
   case Triple::xarch:
+  case Triple::spcpu:
     T.setArch(UnknownArch);
     break;
 
@@ -1316,6 +1321,7 @@ Triple Triple::get64BitArchVariant() const {
   case Triple::systemz:
   case Triple::x86_64:
   case Triple::xarch:
+  case Triple::spcpu:
   case Triple::wasm64:
   case Triple::renderscript64:
     // Already 64-bit.
@@ -1373,6 +1379,7 @@ Triple Triple::getBigEndianArchVariant() const {
   case Triple::x86:
   case Triple::x86_64:
   case Triple::xarch:
+  case Triple::spcpu:
   case Triple::xcore:
   case Triple::renderscript32:
   case Triple::renderscript64:
@@ -1463,6 +1470,7 @@ bool Triple::isLittleEndian() const {
   case Triple::x86:
   case Triple::x86_64:
   case Triple::xarch:
+  case Triple::spcpu:
   case Triple::xcore:
   case Triple::tcele:
   case Triple::renderscript32:

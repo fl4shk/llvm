@@ -18,6 +18,13 @@ namespace object {
 
 StringRef getELFRelocationTypeName(uint32_t Machine, uint32_t Type) {
   switch (Machine) {
+  case ELF::EM_SPCPU:
+    switch (Type) {
+#include "llvm/Support/ELFRelocs/SPCPU.def"
+    default:
+      break;
+    }
+    break;
   case ELF::EM_XARCH:
     switch (Type) {
 #include "llvm/Support/ELFRelocs/XArch.def"
