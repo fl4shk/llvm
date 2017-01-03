@@ -16,8 +16,8 @@ def RetCC_SPCPU : CallingConv<[
   // i32 are returned in registers R0, R1, R2, R3
   CCIfType<[i32], CCAssignToReg<[R0, R1, R2, R3]>>,
   
-   Integer values get stored in stack slots that are 4 bytes in
-   size and 4-byte aligned.
+  // Integer values get stored in stack slots that are 4 bytes in
+  // size and 4-byte aligned.
   CCIfType<[i32], CCAssignToStack<4, 4>>
   
 ]>;
@@ -33,7 +33,7 @@ def CC_SPCPU : CallingConv<[
   CCIfType<[i32], CCAssignToReg<[R0, R1, R2, R3]>>,
   
   
-  // Integer values get stored in stack slots that are 1 byte in
+  // Integer values get stored in stack slots that are 4 byte in
   // size and 4-byte aligned.
-  CCIfType<[i8], CCAssignToStack<4, 4>>
+  CCIfType<[i32], CCAssignToStack<4, 4>>
 ]>;
