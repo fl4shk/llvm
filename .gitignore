@@ -68,3 +68,6 @@ docs/_build
 #==============================================================================#
 bindings/go/llvm/llvm_config.go
 bindings/go/llvm/workdir
+
+*/types_c.taghl
+*/tags
