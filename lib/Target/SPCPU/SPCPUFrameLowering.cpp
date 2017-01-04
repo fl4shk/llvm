@@ -74,6 +74,6 @@ MachineBasicBlock::iterator SPCPUFrameLowering::eliminateCallFramePseudoInstr(
   //  return MBB.erase(I);
   //}
   //else
-  //  llvm_unreachable("Couldn't reach here");
-  return I;
+    llvm_unreachable("Couldn't reach here");
+  //return I;
 }

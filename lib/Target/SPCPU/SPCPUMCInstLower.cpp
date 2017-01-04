@@ -82,6 +82,7 @@ MCOperand SPCPUMCInstLower::LowerSymbolOperand(const MachineOperand &MO,
 
 MCOperand SPCPUMCInstLower::LowerOperand(const MachineOperand &MO,
                                        unsigned offset) const {
+  MO.dump();
   MachineOperandType MOTy = MO.getType();
 
   switch (MOTy) {
@@ -112,6 +113,7 @@ MCOperand SPCPUMCInstLower::LowerOperand(const MachineOperand &MO,
 void SPCPUMCInstLower::Lower(const MachineInstr *MI, MCInst &OutMI) const {
   OutMI.setOpcode(MI->getOpcode());
 
+	MI->dump();
   for (auto &MO : MI->operands()) {
     const MCOperand MCOp = LowerOperand(MO);
 
