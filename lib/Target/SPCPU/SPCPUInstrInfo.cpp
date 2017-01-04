@@ -34,8 +34,12 @@ using namespace llvm;
 // Pin the vtable to this file.
 void SPCPUInstrInfo::anchor() {}
 
+//SPCPUInstrInfo::SPCPUInstrInfo()
+//  : SPCPUGenInstrInfo(SPCPU::ADJCALLSTACKDOWN, SPCPU::ADJCALLSTACKUP),
+//    RI() {
+//}
 SPCPUInstrInfo::SPCPUInstrInfo()
-  : SPCPUGenInstrInfo(SPCPU::ADJCALLSTACKDOWN, SPCPU::ADJCALLSTACKUP),
+  : SPCPUGenInstrInfo(SPCPU::RET),
     RI() {
 }
 

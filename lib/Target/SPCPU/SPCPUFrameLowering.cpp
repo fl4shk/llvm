@@ -69,11 +69,11 @@ void SPCPUFrameLowering::emitEpilogue(MachineFunction &MF,
 MachineBasicBlock::iterator SPCPUFrameLowering::eliminateCallFramePseudoInstr(
     MachineFunction &MF, MachineBasicBlock &MBB,
     MachineBasicBlock::iterator I) const {
-  if (I->getOpcode() == SPCPU::ADJCALLSTACKUP ||
-      I->getOpcode() == SPCPU::ADJCALLSTACKDOWN) {
-    return MBB.erase(I);
-  }
-  else
-    llvm_unreachable("Couldn't reach here");
+  //if (I->getOpcode() == SPCPU::ADJCALLSTACKUP ||
+  //    I->getOpcode() == SPCPU::ADJCALLSTACKDOWN) {
+  //  return MBB.erase(I);
+  //}
+  //else
+  //  llvm_unreachable("Couldn't reach here");
   return I;
 }

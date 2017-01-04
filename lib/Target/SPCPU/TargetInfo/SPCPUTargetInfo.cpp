@@ -18,5 +18,5 @@ namespace llvm
 }
 
 extern "C" void LLVMInitializeSPCPUTargetInfo() {
-  RegisterTarget<Triple::xarch> X(TheSPCPUTarget, "xarch", "SPCPU");
+  RegisterTarget<Triple::spcpu> X(TheSPCPUTarget, "spcpu", "SPCPU");
 }
