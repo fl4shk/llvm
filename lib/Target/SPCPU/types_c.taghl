@@ -1,0 +1,90 @@
+syn keyword CTagsMember TLOF DL TLInfo FrameLowering RI TSInfo Subtarget InstrItins InstrInfo
+syn keyword CTagsGlobalVariable TheSPCPUTarget
+syn keyword CTagsEnumeratorName NodeType
+syn keyword CTagsEnumerationValue FIRST_NUMBER RET_FLAG CALL LOAD_SYM
+syn keyword CTagsFunction LLVMInitializeSPCPUAsmParser getSubtargetImpl trackLivenessAfterRegAlloc getCalleeSavedRegs insertBranch SelectAddr printInst printOperand SPCPURegisterInfo getFrameRegister LLVMInitializeSPCPUTargetInfo addPreEmitPass getRegisterInfo printAddrModeMemSrc useFPForScavengingIndex LowerReturn getInstrItineraryData
+syn keyword CTagsFunction LLVMInitializeSPCPUDisassembler expandPostRAPseudo addInstSelector Select loadRegFromStackSlot printInstruction EmitFunctionEntryLabel getReservedRegs getCallPreservedMask createSPCPUMCCodeEmitter addPreISel getSelectionDAGInfo getTargetNodeName createPassConfig createSPCPUAsmBackend eliminateFrameIndex getFrameLowering emitEpilogue getMemSrcValue LLVMInitializeSPCPUAsmPrinter EmitInstruction getTargetLowering createSPCPUELFObjectWriter SPCPUELFObjectWriter
+syn keyword CTagsFunction LowerCallResult LowerOperation LLVMInitializeSPCPUTargetMC LowerGlobalAddress LLVMInitializeSPCPUTarget EmitFunctionBodyStart ParseSubtargetFeatures copyPhysReg LowerCall getMachineOpValue requiresRegisterScavenging printRegName stackSlotSize LowerFormalArguments analyzeBranch getRegisterName hasFP getRelocType createSPCPUISelDag emitPrologue computeStackSize eliminateCallFramePseudoInstr getInstrInfo removeBranch CanLowerReturn encodeInstruction anchor storeRegToStackSlot
+syn keyword CTagsDefinedName GET_SUBTARGETINFO_ENUM GET_REGINFO_HEADER GET_REGINFO_ENUM GET_SUBTARGETINFO_HEADER GET_INSTRINFO_ENUM GET_INSTRINFO_HEADER
+syn keyword CTagsClass SPCPUInstPrinter SPCPUTargetMachine SPCPUMCAsmInfo SPCPUTargetLowering SPCPUSubtarget SPCPUSelectionDAGInfo SPCPUFrameLowering SPCPUInstrInfo SPCPUFunctionInfo
+syn keyword CTagsNamespace llvm SPCPUISD
+
+" Matches for file InstPrinter/SPCPUInstPrinter.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "InstPrinter/SPCPUInstPrinter.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsFunction printExpr
+	syn keyword CTagsDefinedName GET_INSTRUCTION_NAME DEBUG_TYPE
+	
+endif
+" Matches for file TargetInfo/SPCPUTargetInfo.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "TargetInfo/SPCPUTargetInfo.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsNamespace llvm
+	
+endif
+" Matches for file MCTargetDesc/SPCPUELFObjectWriter.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "MCTargetDesc/SPCPUELFObjectWriter.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsFunction getRelocType
+	syn keyword CTagsClass SPCPUELFObjectWriter
+	syn keyword CTagsNamespace __anon3589f0110110
+	
+endif
+" Matches for file SPCPUSubtarget.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "SPCPUSubtarget.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsDefinedName GET_SUBTARGETINFO_CTOR GET_SUBTARGETINFO_TARGET_DESC DEBUG_TYPE
+	
+endif
+" Matches for file MCTargetDesc/SPCPUMCTargetDesc.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "MCTargetDesc/SPCPUMCTargetDesc.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsFunction createSPCPUMCInstrInfo createSPCPUMCSubtargetInfo createSPCPUMCRegisterInfo adjustCodeGenOpts createSPCPUMCAsmInfo createSPCPUMCInstPrinter
+	syn keyword CTagsDefinedName GET_INSTRINFO_MC_DESC GET_REGINFO_MC_DESC GET_SUBTARGETINFO_MC_DESC
+	
+endif
+" Matches for file MCTargetDesc/SPCPUMCCodeEmitter.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "MCTargetDesc/SPCPUMCCodeEmitter.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsMember CTX MCII
+	syn keyword CTagsFunction EmitByte encodeInstruction getBinaryCodeForInstr EmitConstant getMachineOpValue getMemSrcValue
+	syn keyword CTagsDefinedName DEBUG_TYPE
+	syn keyword CTagsClass SPCPUMCCodeEmitter
+	syn keyword CTagsNamespace __anon7af9528b0110
+	
+endif
+" Matches for file SPCPUInstrInfo.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "SPCPUInstrInfo.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsDefinedName GET_INSTRINFO_CTOR_DTOR
+	
+endif
+" Matches for file SPCPUAsmPrinter.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "SPCPUAsmPrinter.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsFunction EmitInstruction getPassName EmitFunctionBodyStart EmitFunctionEntryLabel
+	syn keyword CTagsDefinedName DEBUG_TYPE
+	syn keyword CTagsClass SPCPUAsmPrinter
+	syn keyword CTagsNamespace __anon8c6b42060110
+	
+endif
+" Matches for file SPCPUISelDAGToDAG.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "SPCPUISelDAGToDAG.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsMember Subtarget
+	syn keyword CTagsFunction SelectAddr Select getPassName
+	syn keyword CTagsClass SPCPUDAGToDAGISel
+	syn keyword CTagsNamespace __anone1cf9c490110
+	
+endif
+" Matches for file SPCPURegisterInfo.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "SPCPURegisterInfo.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsDefinedName GET_REGINFO_TARGET_DESC
+	
+endif
+" Matches for file MCTargetDesc/SPCPUAsmBackend.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "MCTargetDesc/SPCPUAsmBackend.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsMember OSABI
+	syn keyword CTagsFunction applyFixup mayNeedRelaxation writeNopData processFixupValue getPointerSize createObjectWriter fixupNeedsRelaxation relaxInstruction getNumFixupKinds
+	syn keyword CTagsClass ELFSPCPUAsmBackend SPCPUAsmBackend SPCPUELFObjectWriter
+	syn keyword CTagsNamespace __anon3c7e6baf0210 __anon3c7e6baf0110
+	
+endif
+" Matches for file SPCPUTargetMachine.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "SPCPUTargetMachine.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsFunction addPreEmitPass getEffectiveRelocModel getSPCPUTargetMachine addPreISel addInstSelector computeDataLayout
+	syn keyword CTagsClass SPCPUPassConfig
+	syn keyword CTagsNamespace __anonb21e219d0110
+	
+endif

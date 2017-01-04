@@ -48,12 +48,12 @@ const char *SPCPUTargetLowering::getTargetNodeName(unsigned Opcode) const {
 SPCPUTargetLowering::SPCPUTargetLowering(SPCPUTargetMachine &SPCPUTM)
     : TargetLowering(SPCPUTM), Subtarget(*SPCPUTM.getSubtargetImpl()) {
   // Set up the register classes.
-  addRegisterClass(MVT::i32, &SPCPU::GRRegsRegClass);
+  addRegisterClass(MVT::i32, &SPCPU::reg_pairsRegClass);
 
   // Compute derived properties from the register classes
   computeRegisterProperties(Subtarget.getRegisterInfo());
 
-  setStackPointerRegisterToSaveRestore(SPCPU::SP);
+  setStackPointerRegisterToSaveRestore(SPCPU::sp);
 
   setSchedulingPreference(Sched::Source);
 

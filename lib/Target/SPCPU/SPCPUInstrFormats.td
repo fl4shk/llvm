@@ -28,7 +28,8 @@ class SPCPUPseudoInst<dag outs, dag ins, string asmstr, list<dag> pattern>
   let isPseudo = 1;
 }
 
-class ALUInst<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern>
+class ALUInst<bits<4> opcode, dag outs, dag ins, string asmstr, 
+	list<dag> pattern>
     : InstSPCPU<outs, ins, asmstr, pattern> {
   let Inst{127-126} = 0b00;
   let Inst{125-122} = opcode;
