@@ -20,12 +20,12 @@ def RetCC_SPCPU : CallingConv<[
   //// size and 4-byte aligned.
   //CCIfType<[i32], CCAssignToStack<4, 4>>
   
-  // i8 are returned in registers r0, r1, r2, r3
-  CCIfType<[i8], CCAssignToReg<[r0, r1, r2, r3]>>,
+  // The first 2 integer arguments are passed in integer reg pairs
+  CCIfType<[i16], CCAssignToReg<[r0p, r2p]>>,
   
-  // Integer values get stored in stack slots that are 1 byte in
-  // size and 1-byte aligned.
-  CCIfType<[i8], CCAssignToStack<1, 1>>
+  // Integer values get stored in stack slots that are 2 bytes in
+  // size and 2-byte aligned.
+  CCIfType<[i16], CCAssignToStack<2, 2>>
 ]>;
 
 //===----------------------------------------------------------------------===//
@@ -44,15 +44,15 @@ def CC_SPCPU : CallingConv<[
   //CCIfType<[i32], CCAssignToStack<4, 4>>
   
   
-  //// Promote i8/i16 arguments to i32.
-  //CCIfType<[i8, i16], CCPromoteToType<i32>>,
+  // Promote i8 arguments to i16.
+  CCIfType<[i8], CCPromoteToType<i16>>,
 
 
-  // The first 4 integer arguments are passed in integer registers.
-  CCIfType<[i8], CCAssignToReg<[r0, r1, r2, r3]>>,
+  // The first 2 integer arguments are passed in integer reg pairs
+  CCIfType<[i16], CCAssignToReg<[r0p, r2p]>>,
   
   
-  // Integer values get stored in stack slots that are 1 byte in
-  // size and 1-byte aligned.
-  CCIfType<[i8], CCAssignToStack<1, 1>>
+  // Integer values get stored in stack slots that are 2 bytes in
+  // size and 2-byte aligned.
+  CCIfType<[i16], CCAssignToStack<2, 2>>
 ]>;

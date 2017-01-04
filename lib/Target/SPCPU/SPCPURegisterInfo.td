@@ -36,7 +36,7 @@
 class SPCPURegPair< bits<4> enc, string n > : Register<n> 
 //class SPCPURegPair< bits<4> enc, string n >
 {
-	let HWEncoding = enc;
+	let HWEncoding = { 0b00000000000, enc, 0b0 };
 	//bits<4> the_enc = enc;
 	bits<4> hi_half_enc = { enc{3-1}, 0b0 };
 	bits<4> lo_half_enc = { enc{3-1}, 0b1 };
@@ -46,8 +46,8 @@ class SPCPURegPair< bits<4> enc, string n > : Register<n>
 	
 	//let NAME = !strconcat( "r", !cast<string>(enc), "p" );
 	//string NAME = !strconcat( "r", !cast<string>(enc), "p" );
-	string name_hi = !strconcat( "r", !cast<string>({ the_enc{3-1}, 0b0 }) );
-	string name_lo = !strconcat( "r", !cast<string>({ the_enc{3-1}, 0b1 }) );
+	string name_hi = !strconcat( "r", !cast<string>({ enc{3-1}, 0b0 }) );
+	string name_lo = !strconcat( "r", !cast<string>({ enc{3-1}, 0b1 }) );
 }
 
 foreach i = [ 0, 2, 4, 6, 8 ] in
@@ -57,3 +57,8 @@ foreach i = [ 0, 2, 4, 6, 8 ] in
 def sp : SPCPURegPair< 10, "sp" >;
 def lr : SPCPURegPair< 12, "lr" >;
 def pc : SPCPURegPair< 14, "pc" >;
+
+
+def reg_pairs : RegisterClass< "SPCPU", [i16], 16,
+	// Return values and arguments
+	(add r0p, r2p, r4p, r6p, r8p, sp, lr, pc)>;

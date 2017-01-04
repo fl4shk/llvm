@@ -18,8 +18,8 @@ include "SPCPUOperators.td"
 // ALU Instructions
 //===----------------------------------------------------------------------===//
 multiclass BinOp<bits<4> opcode, string opstr, SDNode opnode> {
-  def rr : ALUInst<opcode, (outs GRRegs:$dst),
-                   (ins GRRegs:$src1, GRRegs:$src2),
+  def rr : ALUInst<opcode, (outs reg_pairs:$dst),
+                   (ins reg_pairs:$src1, reg_pairs:$src2),
                    !strconcat(opstr, " $dst, $src1, $src2"),
                    [(set i32:$dst, (opnode i32:$src1, i32:$src2))]> {
     bits<4> dst;
@@ -48,7 +48,7 @@ def SPCPUcallseq_end   : SDNode<"ISD::CALLSEQ_END",
 // Pseudo Instructions
 //===----------------------------------------------------------------------===//
 
-let Defs = [SP], Uses = [SP] in {
+let Defs = [sp], Uses = [sp] in {
 def ADJCALLSTACKDOWN : SPCPUPseudoInst<(outs), (ins i32imm:$amt),
                                     "# ADJCALLSTACKDOWN $amt",
                                     [(SPCPUcallseq_start timm:$amt)]>;
