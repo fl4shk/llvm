@@ -84,6 +84,8 @@ void SPCPUInstPrinter::printAddrModeMemSrc(const MCInst *MI, unsigned OpNum,
 
 void SPCPUInstPrinter::printOperand(const MCInst *MI, unsigned OpNo,
                                   raw_ostream &O) {
+  // XXX: Add once there is an operand encoding available
+  return;
   const MCOperand &Op = MI->getOperand(OpNo);
   if (Op.isReg()) {
     printRegName(O, Op.getReg());

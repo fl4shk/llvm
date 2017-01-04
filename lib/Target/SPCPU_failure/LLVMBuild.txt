@@ -1,0 +1,35 @@
+;===- ./lib/Target/SPCPU/LLVMBuild.txt -------------------------*- Conf -*--===;
+;
+;                     The LLVM Compiler Infrastructure
+;
+; This file is distributed under the University of Illinois Open Source
+; License. See LICENSE.TXT for details.
+;
+;===------------------------------------------------------------------------===;
+;
+; This is an LLVMBuild description file for the components in this subdirectory.
+;
+; For more information on the LLVMBuild system, please see:
+;
+;   http://llvm.org/docs/LLVMBuild.html
+;
+;===------------------------------------------------------------------------===;
+
+[common]
+subdirectories = AsmParser Disassembler InstPrinter MCTargetDesc TargetInfo Utils
+
+[component_0]
+type = TargetGroup
+name = SPCPU
+parent = Target
+has_asmparser = 1
+has_asmprinter = 1
+has_disassembler = 1
+has_jit = 0
+
+[component_1]
+type = Library
+name = SPCPUCodeGen
+parent = SPCPU
+required_libraries = SPCPUAsmPrinter SPCPUDesc SPCPUInfo Analysis AsmPrinter CodeGen Core MC Scalar SelectionDAG Support Target GlobalISel
+add_to_library_groups = SPCPU

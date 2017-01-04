@@ -34,12 +34,8 @@ using namespace llvm;
 // Pin the vtable to this file.
 void SPCPUInstrInfo::anchor() {}
 
-//SPCPUInstrInfo::SPCPUInstrInfo()
-//  : SPCPUGenInstrInfo(SPCPU::ADJCALLSTACKDOWN, SPCPU::ADJCALLSTACKUP),
-//    RI() {
-//}
 SPCPUInstrInfo::SPCPUInstrInfo()
-  : SPCPUGenInstrInfo(SPCPU::RET),
+  : SPCPUGenInstrInfo(SPCPU::ADJCALLSTACKDOWN, SPCPU::ADJCALLSTACKUP),
     RI() {
 }
 
@@ -75,6 +71,7 @@ bool SPCPUInstrInfo::analyzeBranch(MachineBasicBlock &MBB, MachineBasicBlock *&T
                    SmallVectorImpl<MachineOperand> &Cond,
                    bool AllowModify) const {
   // XXX:
+  //llvm_unreachable("Unimplemented operand");
   return false;
 }
 
@@ -84,6 +81,7 @@ bool SPCPUInstrInfo::analyzeBranch(MachineBasicBlock &MBB, MachineBasicBlock *&T
 unsigned SPCPUInstrInfo::removeBranch(MachineBasicBlock &MBB,
                       int *BytesRemoved) const {
   // XXX:
+  llvm_unreachable("Unimplemented operand");
   return 0;
 }
 
@@ -102,6 +100,7 @@ unsigned SPCPUInstrInfo::insertBranch(MachineBasicBlock &MBB, MachineBasicBlock 
                       const DebugLoc &DL,
                       int *BytesAdded) const {
   // XXX:
+  llvm_unreachable("Unimplemented operand");
   return 0;
 }
 
@@ -109,7 +108,8 @@ void SPCPUInstrInfo::copyPhysReg(MachineBasicBlock &MBB, MachineBasicBlock::iter
                  const DebugLoc &DL, unsigned DestReg, unsigned SrcReg,
                  bool KillSrc) const {
 
-  // XXX:
+  BuildMI(MBB, I, I->getDebugLoc(), get(SPCPU::MOVrr), DestReg)
+      .addReg(SrcReg, getKillRegState(KillSrc));
 }
 
 void SPCPUInstrInfo::storeRegToStackSlot(MachineBasicBlock &MBB,
@@ -120,6 +120,7 @@ void SPCPUInstrInfo::storeRegToStackSlot(MachineBasicBlock &MBB,
                                          const TargetRegisterInfo *TRI) const
 {
   // XXX:
+  llvm_unreachable("Unimplemented operand");
 }
 
 void SPCPUInstrInfo::loadRegFromStackSlot(MachineBasicBlock &MBB,
@@ -129,6 +130,7 @@ void SPCPUInstrInfo::loadRegFromStackSlot(MachineBasicBlock &MBB,
                                           const TargetRegisterInfo *TRI) const
 {
   // XXX:
+  llvm_unreachable("Unimplemented operand");
 }
 
 bool SPCPUInstrInfo::expandPostRAPseudo(MachineInstr &MI) const {

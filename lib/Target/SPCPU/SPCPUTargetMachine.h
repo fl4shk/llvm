@@ -47,7 +47,7 @@ public:
 
   TargetLoweringObjectFile *getObjFileLowering() const override {
     return TLOF.get();
-}
+  }
 };
 
 } // end namespace llvm

@@ -43,18 +43,19 @@ const char *SPCPUTargetLowering::getTargetNodeName(unsigned Opcode) const {
   default:
     return nullptr;
   case SPCPUISD::RET_FLAG: return "RetFlag";
+  case SPCPUISD::MOVEi32: return "MOVEi32";
   }
 }
 
 SPCPUTargetLowering::SPCPUTargetLowering(SPCPUTargetMachine &SPCPUTM)
     : TargetLowering(SPCPUTM), Subtarget(*SPCPUTM.getSubtargetImpl()) {
   // Set up the register classes.
-  addRegisterClass(MVT::i32, &SPCPU::reg_pairsRegClass);
+  addRegisterClass(MVT::i32, &SPCPU::GRRegsRegClass);
 
   // Compute derived properties from the register classes
   computeRegisterProperties(Subtarget.getRegisterInfo());
 
-  setStackPointerRegisterToSaveRestore(SPCPU::sp);
+  setStackPointerRegisterToSaveRestore(SPCPU::SP);
 
   setSchedulingPreference(Sched::Source);
 
@@ -73,11 +74,7 @@ SDValue SPCPUTargetLowering::LowerOperation(SDValue Op, SelectionDAG &DAG) const
 
 SDValue SPCPUTargetLowering::LowerGlobalAddress(SDValue Op, SelectionDAG& DAG) const
 {
-  EVT VT = Op.getValueType();
-  GlobalAddressSDNode *GlobalAddr = cast<GlobalAddressSDNode>(Op.getNode());
-  SDValue TargetAddr =
-      DAG.getTargetGlobalAddress(GlobalAddr->getGlobal(), Op, MVT::i32);
-  return DAG.getNode(SPCPUISD::LOAD_SYM, Op, VT, TargetAddr);
+  llvm_unreachable("Unimplemented operand");
 }
 
 //===----------------------------------------------------------------------===//
@@ -113,7 +110,36 @@ SDValue SPCPUTargetLowering::LowerFormalArguments(SDValue Chain, CallingConv::ID
                              const SmallVectorImpl<ISD::InputArg> &Ins,
                              const SDLoc &DL, SelectionDAG &DAG,
                              SmallVectorImpl<SDValue> &InVals) const {
-  // XXX: This isn't proper
+  MachineFunction &MF = DAG.getMachineFunction();
+  MachineRegisterInfo &RegInfo = MF.getRegInfo();
+
+  assert(!isVarArg && "VarArg not supported");
+
+  // Assign locations to all of the incoming arguments.
+  SmallVector<CCValAssign, 16> ArgLocs;
+  CCState CCInfo(CallConv, isVarArg, DAG.getMachineFunction(), ArgLocs,
+                 *DAG.getContext());
+
+  CCInfo.AnalyzeFormalArguments(Ins, CC_SPCPU);
+
+  for (auto &VA : ArgLocs) {
+    if (VA.isRegLoc()) {
+      // Arguments passed in registers
+      EVT RegVT = VA.getLocVT();
+      assert(RegVT.getSimpleVT().SimpleTy == MVT::i32 &&
+             "Only support MVT::i32 register passing");
+      const unsigned VReg = RegInfo.createVirtualRegister(&SPCPU::GRRegsRegClass);
+      RegInfo.addLiveIn(VA.getLocReg(), VReg);
+      SDValue ArgIn = DAG.getCopyFromReg(Chain, DL, VReg, RegVT);
+
+      InVals.push_back(ArgIn);
+    }
+    else
+    {
+      llvm_unreachable("Unimplemented");
+    }
+  }
+
   return Chain;
 }
 
@@ -124,8 +150,9 @@ SDValue SPCPUTargetLowering::LowerFormalArguments(SDValue Chain, CallingConv::ID
 bool SPCPUTargetLowering::CanLowerReturn(
     CallingConv::ID CallConv, MachineFunction &MF, bool isVarArg,
     const SmallVectorImpl<ISD::OutputArg> &Outs, LLVMContext &Context) const {
-  // XXX: This isn't proper
-  return true;
+  SmallVector<CCValAssign, 16> RVLocs;
+  CCState CCInfo(CallConv, isVarArg, MF, RVLocs, Context);
+  return CCInfo.CheckReturn(Outs, RetCC_SPCPU);
 }
 
 SDValue SPCPUTargetLowering::LowerReturn(SDValue Chain, CallingConv::ID CallConv, bool isVarArg,
@@ -150,14 +177,17 @@ SDValue SPCPUTargetLowering::LowerReturn(SDValue Chain, CallingConv::ID CallConv
   SmallVector<SDValue, 4> RetOps(1, Chain);
 
   // Copy the result values into the output registers.
-  for (unsigned i = 0, e = RVLocs.size(); i < e; ++i) {
+  for (unsigned i = 0, realRVLocIdx = 0; i != RVLocs.size();
+       ++i, ++realRVLocIdx) {
     CCValAssign &VA = RVLocs[i];
     assert(VA.isRegLoc() && "Can only return in registers!");
+    SDValue Arg = OutVals[realRVLocIdx];
 
-    Chain = DAG.getCopyToReg(Chain, DL, VA.getLocReg(), OutVals[i], Flag);
+    auto Reg = DAG.getRegister(VA.getLocReg(), VA.getLocVT());
 
+    Chain = DAG.getCopyToReg(Chain, DL, VA.getLocReg(), Arg, Flag);
     Flag = Chain.getValue(1);
-    RetOps.push_back(DAG.getRegister(VA.getLocReg(), VA.getLocVT()));
+    RetOps.push_back(Reg);
   }
 
   RetOps[0] = Chain; // Update chain.

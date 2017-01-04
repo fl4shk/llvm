@@ -39,30 +39,27 @@
 
 using namespace llvm;
 
-SPCPURegisterInfo::SPCPURegisterInfo() : SPCPUGenRegisterInfo(SPCPU::lr) {}
+SPCPURegisterInfo::SPCPURegisterInfo() : SPCPUGenRegisterInfo(SPCPU::LR) {}
 
 const uint16_t *
 SPCPURegisterInfo::getCalleeSavedRegs(const MachineFunction *MF) const {
-  static const uint16_t CalleeSavedRegs[] 
-	= { SPCPU::r4p, SPCPU::r6p, SPCPU::r8p,
-		SPCPU::lr, 0 };
+  static const uint16_t CalleeSavedRegs[] = { SPCPU::R4, SPCPU::R5, SPCPU::R6,
+                                              SPCPU::R7, SPCPU::R8, SPCPU::R9,
+                                              0 };
   return CalleeSavedRegs;
 }
 
-BitVector SPCPURegisterInfo::getReservedRegs(const MachineFunction &MF) 
-const
-{
+BitVector SPCPURegisterInfo::getReservedRegs(const MachineFunction &MF) const {
   BitVector Reserved(getNumRegs());
 
-  Reserved.set(SPCPU::sp);
-  Reserved.set(SPCPU::pc);
+  Reserved.set(SPCPU::SP);
+  Reserved.set(SPCPU::LR);
   return Reserved;
 }
 
-const uint32_t *SPCPURegisterInfo::getCallPreservedMask
-	(const MachineFunction &MF, CallingConv::ID) const
-{
-	return 0;
+const uint32_t *SPCPURegisterInfo::getCallPreservedMask(const MachineFunction &MF,
+                                                      CallingConv::ID) const {
+  return 0;
 }
 
 bool
@@ -99,10 +96,10 @@ void SPCPURegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator II,
   // FIXME: check the size of offset.
   MachineOperand &ImmOp = MI.getOperand(ImmOpIdx);
   int Offset = MFI.getObjectOffset(FI) + MFI.getStackSize() + ImmOp.getImm();
-  FIOp.ChangeToRegister(SPCPU::sp, false);
+  FIOp.ChangeToRegister(SPCPU::SP, false);
   ImmOp.setImm(Offset);
 }
 
 unsigned SPCPURegisterInfo::getFrameRegister(const MachineFunction &MF) const {
-  return SPCPU::sp;
+  return SPCPU::SP;
 }

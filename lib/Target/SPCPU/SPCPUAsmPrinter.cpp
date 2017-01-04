@@ -15,7 +15,10 @@
 #define DEBUG_TYPE "asm-printer"
 #include "SPCPU.h"
 #include "InstPrinter/SPCPUInstPrinter.h"
-#include "MCTargetDesc/SPCPUMCTargetDesc.h"
+#include "SPCPUInstrInfo.h"
+#include "SPCPUMCInstLower.h"
+#include "SPCPUSubtarget.h"
+#include "SPCPUTargetMachine.h"
 #include "llvm/ADT/SmallString.h"
 #include "llvm/ADT/StringExtras.h"
 #include "llvm/CodeGen/AsmPrinter.h"
@@ -45,11 +48,12 @@ using namespace llvm;
 
 namespace {
 class SPCPUAsmPrinter : public AsmPrinter {
+  SPCPUMCInstLower MCInstLowering;
 
 public:
   explicit SPCPUAsmPrinter(TargetMachine &TM,
                          std::unique_ptr<MCStreamer> Streamer)
-      : AsmPrinter(TM, std::move(Streamer)) {}
+      : AsmPrinter(TM, std::move(Streamer)), MCInstLowering(*this) {}
 
   virtual llvm::StringRef getPassName() const { return "SPCPU Assembly Printer"; }
 
@@ -68,6 +72,7 @@ void SPCPUAsmPrinter::EmitFunctionEntryLabel() {
 
 void SPCPUAsmPrinter::EmitInstruction(const MachineInstr *MI) {
   MCInst TmpInst;
+  MCInstLowering.Lower(MI, TmpInst);
 
   EmitToStreamer(*OutStreamer, TmpInst);
 }

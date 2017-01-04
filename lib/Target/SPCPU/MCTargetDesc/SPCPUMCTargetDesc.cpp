@@ -41,7 +41,7 @@ static MCInstrInfo *createSPCPUMCInstrInfo() {
 
 static MCRegisterInfo *createSPCPUMCRegisterInfo(const Triple &TT) {
   MCRegisterInfo *X = new MCRegisterInfo();
-  InitSPCPUMCRegisterInfo(X, SPCPU::lr);
+  InitSPCPUMCRegisterInfo(X, SPCPU::LR);
   return X;
 }
 
