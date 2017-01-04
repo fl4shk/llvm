@@ -41,9 +41,7 @@ using namespace llvm;
 const char *SPCPUTargetLowering::getTargetNodeName(unsigned Opcode) const {
   switch (Opcode) {
   default:
-    return nullptr;
-  case SPCPUISD::RET_FLAG: return "RetFlag";
-  case SPCPUISD::MOVEi32: return "MOVEi32";
+    return NULL;
   }
 }
 
@@ -74,7 +72,11 @@ SDValue SPCPUTargetLowering::LowerOperation(SDValue Op, SelectionDAG &DAG) const
 
 SDValue SPCPUTargetLowering::LowerGlobalAddress(SDValue Op, SelectionDAG& DAG) const
 {
-  llvm_unreachable("Unimplemented operand");
+  EVT VT = Op.getValueType();
+  GlobalAddressSDNode *GlobalAddr = cast<GlobalAddressSDNode>(Op.getNode());
+  SDValue TargetAddr =
+      DAG.getTargetGlobalAddress(GlobalAddr->getGlobal(), Op, MVT::i32);
+  return DAG.getNode(SPCPUISD::LOAD_SYM, Op, VT, TargetAddr);
 }
 
 //===----------------------------------------------------------------------===//
@@ -110,37 +112,7 @@ SDValue SPCPUTargetLowering::LowerFormalArguments(SDValue Chain, CallingConv::ID
                              const SmallVectorImpl<ISD::InputArg> &Ins,
                              const SDLoc &DL, SelectionDAG &DAG,
                              SmallVectorImpl<SDValue> &InVals) const {
-  MachineFunction &MF = DAG.getMachineFunction();
-  MachineRegisterInfo &RegInfo = MF.getRegInfo();
-
-  assert(!isVarArg && "VarArg not supported");
-
-  // Assign locations to all of the incoming arguments.
-  SmallVector<CCValAssign, 16> ArgLocs;
-  CCState CCInfo(CallConv, isVarArg, DAG.getMachineFunction(), ArgLocs,
-                 *DAG.getContext());
-
-  CCInfo.AnalyzeFormalArguments(Ins, CC_SPCPU);
-
-  for (auto &VA : ArgLocs) {
-    if (VA.isRegLoc()) {
-      // Arguments passed in registers
-      EVT RegVT = VA.getLocVT();
-      assert(RegVT.getSimpleVT().SimpleTy == MVT::i32 &&
-             "Only support MVT::i32 register passing");
-      const unsigned VReg = RegInfo.createVirtualRegister(&SPCPU::GRRegsRegClass);
-      RegInfo.addLiveIn(VA.getLocReg(), VReg);
-      SDValue ArgIn = DAG.getCopyFromReg(Chain, DL, VReg, RegVT);
-
-      InVals.push_back(ArgIn);
-    }
-    else
-    {
-      llvm_unreachable("Unimplemented");
-    }
-  }
-
-  return Chain;
+  llvm_unreachable("Unimplemented");
 }
 
 //===----------------------------------------------------------------------===//
@@ -150,52 +122,12 @@ SDValue SPCPUTargetLowering::LowerFormalArguments(SDValue Chain, CallingConv::ID
 bool SPCPUTargetLowering::CanLowerReturn(
     CallingConv::ID CallConv, MachineFunction &MF, bool isVarArg,
     const SmallVectorImpl<ISD::OutputArg> &Outs, LLVMContext &Context) const {
-  SmallVector<CCValAssign, 16> RVLocs;
-  CCState CCInfo(CallConv, isVarArg, MF, RVLocs, Context);
-  return CCInfo.CheckReturn(Outs, RetCC_SPCPU);
+  llvm_unreachable("Unimplemented");
 }
 
 SDValue SPCPUTargetLowering::LowerReturn(SDValue Chain, CallingConv::ID CallConv, bool isVarArg,
                     const SmallVectorImpl<ISD::OutputArg> &Outs,
                     const SmallVectorImpl<SDValue> &OutVals, const SDLoc &DL,
                     SelectionDAG &DAG) const {
-  if (isVarArg) {
-    report_fatal_error("VarArg not supported");
-  }
-
-  // CCValAssign - represent the assignment of
-  // the return value to a location
-  SmallVector<CCValAssign, 16> RVLocs;
-
-  // CCState - Info about the registers and stack slot.
-  CCState CCInfo(CallConv, isVarArg, DAG.getMachineFunction(), RVLocs,
-                 *DAG.getContext());
-
-  CCInfo.AnalyzeReturn(Outs, RetCC_SPCPU);
-
-  SDValue Flag;
-  SmallVector<SDValue, 4> RetOps(1, Chain);
-
-  // Copy the result values into the output registers.
-  for (unsigned i = 0, realRVLocIdx = 0; i != RVLocs.size();
-       ++i, ++realRVLocIdx) {
-    CCValAssign &VA = RVLocs[i];
-    assert(VA.isRegLoc() && "Can only return in registers!");
-    SDValue Arg = OutVals[realRVLocIdx];
-
-    auto Reg = DAG.getRegister(VA.getLocReg(), VA.getLocVT());
-
-    Chain = DAG.getCopyToReg(Chain, DL, VA.getLocReg(), Arg, Flag);
-    Flag = Chain.getValue(1);
-    RetOps.push_back(Reg);
-  }
-
-  RetOps[0] = Chain; // Update chain.
-
-  // Add the flag if we have it.
-  if (Flag.getNode()) {
-    RetOps.push_back(Flag);
-  }
-
-  return DAG.getNode(SPCPUISD::RET_FLAG, DL, MVT::Other, RetOps);
+  llvm_unreachable("Unimplemented");
 }

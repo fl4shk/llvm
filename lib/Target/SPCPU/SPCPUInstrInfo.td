@@ -36,20 +36,13 @@ multiclass BinOp<bits<4> opcode, string opstr, SDNode opnode> {
 
 defm ADD  : BinOp<0b0000, "add", add>;
 
-//===----------------------------------------------------------------------===//
-// Mov Instructions
-//===----------------------------------------------------------------------===//
-def MOVrr  : ALUInst<0b1101, (outs GRRegs:$dst), (ins GRRegs:$src),
-                     "mov $dst, $src",
-                     [/* No pattern */]> {
-  bits<4> dst;
-  bits<4> src;
-}
-
-def MOVi32 : InstSPCPU<(outs GRRegs:$dst), (ins i32imm:$src), "",
-                     [(set i32:$dst, (movei32 imm:$src))]> {
-  let isPseudo = 1;
-}
+def SPCPUcallseq_start : SDNode<"ISD::CALLSEQ_START",
+                                SDCallSeqStart<[ SDTCisVT<0, i32> ]>,
+                                [SDNPHasChain, SDNPOutGlue]>;
+def SPCPUcallseq_end   : SDNode<"ISD::CALLSEQ_END",
+                                SDCallSeqEnd<[ SDTCisVT<0, i32>,
+                                               SDTCisVT<1, i32> ]>,
+                                [SDNPHasChain, SDNPOptInGlue, SDNPOutGlue]>;
 
 //===----------------------------------------------------------------------===//
 // Pseudo Instructions
@@ -64,14 +57,3 @@ def ADJCALLSTACKUP   : SPCPUPseudoInst<(outs), (ins i32imm:$amt1, i32imm:$amt2),
                                     [(SPCPUcallseq_end timm:$amt1, timm:$amt2)]>;
 }
 
-//===----------------------------------------------------------------------===//
-// Return Instructions
-//===----------------------------------------------------------------------===//
-
-let isTerminator = 1, isReturn = 1, isBarrier = 1, Uses = [LR] in {
-  def RET : InstSPCPU<(outs), (ins variable_ops),
-                    "ret",  [(SPCPURetFlag)]> {
-    let Inst{29-26} = 0b1111;
-
-  }
-}

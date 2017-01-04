@@ -6,7 +6,6 @@ tablegen(LLVM SPCPUGenAsmWriter.inc -gen-asm-writer)
 tablegen(LLVM SPCPUGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM SPCPUGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM SPCPUGenSubtargetInfo.inc -gen-subtarget)
-tablegen(LLVM SPCPUGenDisassemblerTables.inc -gen-disassembler)
 tablegen(LLVM SPCPUGenMCCodeEmitter.inc -gen-emitter)
 
 add_public_tablegen_target(SPCPUCommonTableGen)

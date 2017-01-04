@@ -56,34 +56,12 @@ uint64_t SPCPUFrameLowering::computeStackSize(MachineFunction &MF) const {
 
 void SPCPUFrameLowering::emitPrologue(MachineFunction &MF,
                                     MachineBasicBlock &MBB) const {
-  // Compute the stack size, to determine if we need a prologue at all.
-  const TargetInstrInfo &TII = *MF.getSubtarget().getInstrInfo();
-  MachineBasicBlock::iterator MBBI = MBB.begin();
-  DebugLoc dl = MBBI != MBB.end() ? MBBI->getDebugLoc() : DebugLoc();
-  uint64_t StackSize = computeStackSize(MF);
-  if (!StackSize) {
-    return;
-  }
-
-  // Adjust the stack pointer.
-  unsigned StackReg = SPCPU::SP;
-  llvm_unreachable("Couldn't reach here");
+  // XXX:
 }
 
 void SPCPUFrameLowering::emitEpilogue(MachineFunction &MF,
                                     MachineBasicBlock &MBB) const {
-  // Compute the stack size, to determine if we need an epilogue at all.
-  const TargetInstrInfo &TII = *MF.getSubtarget().getInstrInfo();
-  MachineBasicBlock::iterator MBBI = MBB.getLastNonDebugInstr();
-  DebugLoc dl = MBBI->getDebugLoc();
-  uint64_t StackSize = computeStackSize(MF);
-  if (!StackSize) {
-    return;
-  }
-
-  // Restore the stack pointer to what it was at the beginning of the function.
-  unsigned StackReg = SPCPU::SP;
-  llvm_unreachable("Couldn't reach here");
+  // XXX:
 }
 
 // This function eliminates ADJCALLSTACKDOWN, ADJCALLSTACKUP pseudo
