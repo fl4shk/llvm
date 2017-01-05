@@ -150,3 +150,11 @@ let isTerminator = 1, isReturn = 1, isBarrier = 1, Uses = [LR] in {
 
   }
 }
+
+//let isCall = 1, Defs = [LR] in 
+//{
+//	def CALL : InstXArch<(outs), (ins
+//	
+//	
+//}
+
