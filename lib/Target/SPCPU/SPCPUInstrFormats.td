@@ -39,6 +39,15 @@ class SPCPUPseudoInst<dag outs, dag ins, string asmstr, list<dag> pattern>
 
 class ALUInst<bits<4> opcode, dag outs, dag ins, string asmstr, list<dag> pattern>
     : InstSPCPU<outs, ins, asmstr, pattern> {
+
+  bits<7> dst;
+  bits<7> src1;
+  bits<7> src2;
+
   let Inst{31-30} = 0b00;
   let Inst{29-26} = opcode;
+
+  let Inst{20-14} = src1;
+  let Inst{13-7} = dst;
+  let Inst{6-0}   = src2;
 }
